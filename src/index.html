@@ -5,11 +5,47 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>test task</title>
+  <title>car leasing</title>
 </head>
 
-<body>
+<body class="body">
+  <form class="leasing-form">
+    <h1 class="leasing-form__header">Рассчитайте стоимость автомобиля в лизинг</h1>
 
+    <fieldset class="leasing-form__input-set">
+      <legend class="leasing-form__header">Желаемая сумма кредита</legend>
+      <input type="text" name="amount" class="leasing-form__input">
+      <input type="range" min="0" max="100" class="leasing-form__input_range">
+    </fieldset>
+
+    <fieldset class="leasing-form__input-set">
+      <legend class="leasing-form__header">Первоначальный взнос</legend>
+      <input type="text" name="initial" class="leasing-form__input">
+      <input type="text" name="percent" class="leasing-form__input_percent">
+      <input type="range" min="0" max="100" class="leasing-form__input_range">
+    </fieldset>
+
+    <fieldset class="leasing-form__input-set">
+      <legend class="leasing-form__header">Срок лизинга</legend>
+      <input type="text" name="time" class="leasing-form__input">
+      <input type="range" min="0" max="100" class="leasing-form__input_range">
+    </fieldset>
+
+    <div class="leasing-form__result-block">
+      <div>
+        <p class="leasing-form__result-text"></p>
+        <p class="leasing-form__result-amount"></p>
+      </div>
+
+      <div>
+        <p class="leasing-form__result-text"></p>
+        <p class="leasing-form__result-month"></p>
+      </div>
+    </div>
+
+    <button class="leasing-form__button" type="submit">Оставить заявку</button>
+
+  </form>
 </body>
 
 </html>
