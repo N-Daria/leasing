@@ -2,14 +2,13 @@
 
 .leasing-form__input_range {
   -webkit-appearance: none;
-  width: calc(100% - $smallInputWidth);
+  width: 100%;
   margin: 0 auto;
   display: block;
   top: -2px;
   height: 2px;
   position: relative;
   background-image: linear-gradient($orangeColor, $orangeColor);
-  background-size: 70% 100%;
   background-repeat: no-repeat;
   transition: height 0.5s, width 0.5s;
 
