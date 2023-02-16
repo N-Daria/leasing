@@ -1,0 +1,21 @@
+@import "../../../../consts/consts.scss";
+
+.leasing-form__input_percent {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  max-width: 80px;
+  border-radius: 12px;
+  padding: 11px $smallInputWidth 11px 11px;
+  border: $whiteColor solid 6px;
+  background-color: rgba(224, 224, 224, 0.4);
+}
+
+@media (min-width: 768px) {
+  .leasing-form__input_percent {
+    padding: 15px $smallInputWidth 15px 17px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

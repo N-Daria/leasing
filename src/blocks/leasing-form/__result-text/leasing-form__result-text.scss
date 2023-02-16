@@ -1,0 +1,15 @@
+@import "../../../consts/consts.scss";
+
+.leasing-form__result-text {
+  @include mainTextSmall;
+
+  color: $darkGreyColor;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .leasing-form__result-text {
+    font-size: 54px;
+    line-height: 49px;
+  }
+}

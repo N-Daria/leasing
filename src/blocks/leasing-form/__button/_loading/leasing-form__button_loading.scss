@@ -1,0 +1,12 @@
+.leasing-form__button_loading::after {
+  content: '';
+  display: block;
+  width: 21px;
+  height: 21px;
+  background-image: url('../../../../images/buttonLoading.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 21px;
+  animation: round infinite 3s;
+  margin: 0 auto;
+}

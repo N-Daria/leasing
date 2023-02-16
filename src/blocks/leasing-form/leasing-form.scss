@@ -1,0 +1,20 @@
+.leasing-form {
+  padding: 44px 20px 64px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .leasing-form {
+    padding: 64px 36px;
+  }
+}
+
+@media (min-width: 1120px) {
+  .leasing-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 64px 48px;
+  }
+}

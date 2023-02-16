@@ -1,2 +1,31 @@
 @import "../vendor/normalize";
 @import "../vendor/fonts/fonts";
+@import "../blocks/body/body.scss";
+
+@import "../blocks/leasing-form/leasing-form.scss";
+
+@import "../blocks/leasing-form/__header/leasing-form__header.scss";
+
+@import "../blocks/leasing-form/__input-set/leasing-form__input-set.scss";
+
+@import "../blocks/leasing-form/__input-header/leasing-form__input-header.scss";
+
+@import "../blocks/leasing-form/__input/leasing-form__input.scss";
+@import "../blocks/leasing-form/__input/_percent/leasing-form__input_percent.scss";
+@import "../blocks/leasing-form/__input/_range/leasing-form__input_range.scss";
+
+@import "../blocks/leasing-form/__form-icon/leasing-form__form-icon.scss";
+@import "../blocks/leasing-form/__form-icon/_month/leasing-form__form-icon_month.scss";
+@import "../blocks/leasing-form/__form-icon/_percent/leasing-form__form-icon_percent.scss";
+@import "../blocks/leasing-form/__form-icon/_rub/leasing-form__form-icon_rub.scss";
+
+@import "../blocks/leasing-form/__result-block/leasing-form__result-block.scss";
+
+@import "../blocks/leasing-form/__block/leasing-form__block.scss";
+
+@import "../blocks/leasing-form/__result-header/leasing-form__result-header.scss";
+
+@import "../blocks/leasing-form/__result-text/leasing-form__result-text.scss";
+
+@import "../blocks/leasing-form/__button/leasing-form__button.scss";
+@import "../blocks/leasing-form/__button/_loading/leasing-form__button_loading.scss";

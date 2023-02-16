@@ -1,0 +1,50 @@
+@import "../../../consts/consts.scss";
+
+.leasing-form__button {
+  @include mainTextSmall;
+
+  color: #FFFFFF;
+  padding: 18px 10px 22px;
+  width: 100%;
+  max-width: 345px;
+  background-color: $orangeColor;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 1s;
+
+  &:hover {
+    background-color: black;
+  }
+
+  &:active {
+    background-color: $lightGreyColor;
+  }
+
+  &:disabled {
+    background-color: $orangeColor;
+    opacity: 0.4;
+  }
+
+}
+
+@media (min-width: 768px) {
+  .leasing-form__button {
+    @include mainTextMedium;
+
+    padding: 14px 10px 18px;
+  }
+}
+
+@media (min-width: 1120px) {
+  .leasing-form__button {
+    max-width: 320px;
+    margin-top: 18px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .leasing-form__button {
+    max-width: 426px;
+  }
+}

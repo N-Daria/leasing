@@ -1,0 +1,18 @@
+@import "../../../consts/consts.scss";
+
+.leasing-form__input-header {
+  color: $graphitColor;
+  margin: 0 0 8px;
+  font-family: 'Gilroy';
+  font-size: 14px;
+  line-height: 19px;
+}
+
+@media (min-width: 768px) {
+  .leasing-form__input-header {
+    font-size: 16px;
+    line-height: 20px;
+    color: $lightGreyColor;
+    margin: 0 0 24px;
+  }
+}

@@ -1,0 +1,24 @@
+@import "../../../consts/consts.scss";
+
+.leasing-form__form-icon {
+  position: relative;
+}
+
+.leasing-form__form-icon::after {
+  content: " ";
+  @include mainTextSmall;
+
+  position: absolute;
+  color: $graphitColor;
+  right: 0;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .leasing-form__form-icon::after {
+    @include mainTextMedium;
+
+    color: $lightGreyColor;
+    padding: 16px 24px;
+  }
+}

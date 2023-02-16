@@ -1,0 +1,42 @@
+@import "../../../../consts/consts.scss";
+
+.leasing-form__input_range {
+  -webkit-appearance: none;
+  width: calc(100% - $smallInputWidth);
+  margin: 0 auto;
+  display: block;
+  top: -2px;
+  height: 2px;
+  position: relative;
+  background-image: linear-gradient($orangeColor, $orangeColor);
+  background-size: 70% 100%;
+  background-repeat: no-repeat;
+  transition: height 0.5s, width 0.5s;
+
+
+  &:hover {
+    height: 1px;
+    cursor: ew-resize;
+
+    &::-webkit-slider-thumb {
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: $orangeColor;
+  }
+
+  &::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+}

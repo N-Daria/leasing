@@ -1,0 +1,15 @@
+.body {
+  margin: 0 auto;
+  font-size: 0;
+  min-width: 320px;
+  max-width: 1440px;
+}
+
+@media (min-width: 1120px) {
+  .body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+}

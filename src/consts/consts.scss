@@ -1,0 +1,27 @@
+$graphitColor: #333E48;
+$darkGreyColor: #333333;
+$lightGreyColor: #575757;
+$orangeColor: #FF9514;
+$whiteColor: #F3F3F4;
+$smallInputWidth: 32px;
+
+@mixin mainTextSmall {
+  font-family: 'Nekst';
+  font-size: 22px;
+  line-height: 20px;
+}
+
+@mixin mainTextMedium {
+  font-size: 30px;
+  line-height: 36px;
+}
+
+@keyframes round {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

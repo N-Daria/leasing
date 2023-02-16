@@ -1,0 +1,27 @@
+@import "../../../consts/consts.scss";
+
+.leasing-form__input::-webkit-outer-spin-button,
+.leasing-form__input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.leasing-form__input {
+  @include mainTextSmall;
+
+  background-color: $whiteColor;
+  border-radius: 16px;
+  border: none;
+  color: $graphitColor;
+  padding: 17px 70px 17px 17px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .leasing-form__input {
+    @include mainTextMedium;
+
+    color: $lightGreyColor;
+    padding: 16px 70px 16px 24px;
+  }
+}

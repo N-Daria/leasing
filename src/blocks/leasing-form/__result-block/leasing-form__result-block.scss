@@ -1,0 +1,27 @@
+.leasing-form__result-block {
+  margin: 0 0 32px;
+  max-width: 276px;
+}
+
+@media (min-width: 768px) {
+  .leasing-form__result-block {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 44px;
+    max-width: 85%;
+  }
+}
+
+@media (min-width: 1120px) {
+  .leasing-form__result-block {
+    margin: 0;
+    max-width: 57%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .leasing-form__result-block {
+    max-width: 51%;
+  }
+}
