@@ -8,6 +8,12 @@ import {
   initialInput,
   percentRangeInput,
   percentInput,
+  timeInput,
+  leasingForm,
+  leasingFormSubmitButton,
+  resultAmount,
+  resultMonthlyPayment,
+  allInputs,
 } from '../consts/consts';
 
 function formatValue(input, val) {
@@ -19,9 +25,9 @@ function formatValue(input, val) {
 
   value = String(val).replace(/(.)(?=(\d{3})+$)/g, '$1 ');
 
-  if (input.name === 'percent') {
+  if (input && input.name === 'percent') {
     value += '%';
-  } else if (input.name === 'initial') {
+  } else if (input && input.name === 'initial') {
     value += ' ₽';
   }
 
@@ -80,7 +86,10 @@ function handleInputChange({ target }) {
       } else {
         target.value = formatValue(target, value);
         percentRangeInput.value = percentValue;
-        percentRangeInput.style.backgroundSize = `${((percentRangeInput.value - percentRangeInput.min) * 100) / (percentRangeInput.max - percentRangeInput.min)}% 100%`;
+        percentRangeInput.style.backgroundSize = `${
+          ((percentRangeInput.value - percentRangeInput.min) * 100) /
+          (percentRangeInput.max - percentRangeInput.min)
+        }% 100%`;
         percentInput.value = formatValue(percentInput, percentValue);
       }
       return;
@@ -126,6 +135,19 @@ function setInitialRange(input, rangeInput) {
   rangeInput.value = value;
 }
 
+function countLeasing() {
+  const amount = convertToNumber(amountInput.value);
+  const initial = convertToNumber(initialInput.value);
+  const time = convertToNumber(timeInput.value);
+
+  resultAmount.textContent = `${formatValue(null, (amount + initial) * time)} ₽`;
+
+  resultMonthlyPayment.textContent = `${formatValue(
+    null,
+    Math.ceil(((amount - initial) * (0.05 * (1 + 0.05) ** time)) / (1 + 0.05) ** time - 1),
+  )} ₽`;
+}
+
 function setInitial() {
   numberInputs.forEach((el) => {
     if (typeof defaultValues[el.name] === 'number') {
@@ -133,9 +155,38 @@ function setInitial() {
       setInitialRange(el, findConnectedInput(el));
     }
   });
+  countLeasing();
 }
 
-amountInput.addEventListener('change', () => setInitialAmountInputValue(convertToNumber(percentInput.value)));
+function handleLeasingFormSubmit(event) {
+  event.preventDefault();
+
+  leasingFormSubmitButton.classList.add('leasing-form__button_loading');
+  leasingFormSubmitButton.textContent = '';
+  leasingFormSubmitButton.disabled = true;
+
+  const res = {
+    'Желаемая сумма кредита': convertToNumber(amountInput.value),
+    'Первоначальный взнос': convertToNumber(initialInput.value),
+    'Срок лизинга': convertToNumber(timeInput.value),
+    'Сумма договора лизинга': convertToNumber(resultAmount.textContent),
+    'Ежемесячный платеж от': convertToNumber(resultMonthlyPayment.textContent),
+  };
+
+  alert(JSON.stringify(res));
+
+  leasingFormSubmitButton.classList.remove('leasing-form__button_loading');
+  leasingFormSubmitButton.textContent = 'Оставить заявку';
+  leasingFormSubmitButton.disabled = false;
+}
+
+allInputs.forEach((input) => {
+  input.addEventListener('change', countLeasing);
+});
+
+amountInput.addEventListener('change', () => {
+  setInitialAmountInputValue(convertToNumber(percentInput.value));
+});
 
 rangeInputs.forEach((input) => {
   input.addEventListener('input', handleInputChange);
@@ -144,5 +195,7 @@ rangeInputs.forEach((input) => {
 numberInputs.forEach((input) => {
   input.addEventListener('change', handleInputChange);
 });
+
+leasingForm.addEventListener('submit', handleLeasingFormSubmit);
 
 setInitial();
