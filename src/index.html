@@ -1,55 +1,85 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>car leasing</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>car leasing</title>
-</head>
+  <body class="body">
+    <form class="leasing-form">
+      <h1 class="leasing-form__header">Рассчитайте стоимость автомобиля в&nbsp;лизинг</h1>
 
-<body class="body">
-  <form class="leasing-form">
-    <h1 class="leasing-form__header">Рассчитайте стоимость автомобиля в&nbsp;лизинг</h1>
+      <fieldset class="leasing-form__input-set">
+        <legend class="leasing-form__input-header">Желаемая сумма кредита</legend>
+        <div class="leasing-form__form-icon leasing-form__form-icon_rub">
+          <input
+            type="text"
+            min="1500000"
+            max="10000000"
+            name="amount"
+            class="leasing-form__input"
+            maxlength="11"
+          />
+        </div>
+        <input
+          type="range"
+          name="amountRange"
+          min="1500000"
+          max="10000000"
+          class="leasing-form__input_range"
+        />
+      </fieldset>
 
-    <fieldset class="leasing-form__input-set">
-      <legend class="leasing-form__input-header">Желаемая сумма кредита</legend>
-      <div class="leasing-form__form-icon leasing-form__form-icon_rub">
-        <input type="text" min="1500000" max="10000000" name="amount" class="leasing-form__input">
+      <fieldset class="leasing-form__input-set">
+        <legend class="leasing-form__input-header">Первоначальный взнос</legend>
+        <input type="text" name="initial" class="leasing-form__input" maxlength="11" />
+        <input
+          type="text"
+          min="10"
+          max="60"
+          name="percent"
+          class="leasing-form__input leasing-form__input_percent"
+          maxlength="3"
+        />
+        <input
+          type="range"
+          name="percentRange"
+          min="10"
+          max="60"
+          class="leasing-form__input_range"
+        />
+      </fieldset>
+
+      <fieldset class="leasing-form__input-set">
+        <legend class="leasing-form__input-header">Срок лизинга</legend>
+        <div class="leasing-form__form-icon leasing-form__form-icon_month">
+          <input
+            type="text"
+            min="6"
+            max="120"
+            name="time"
+            class="leasing-form__input"
+            maxlength="3"
+          />
+        </div>
+        <input type="range" name="timeRange" min="6" max="120" class="leasing-form__input_range" />
+      </fieldset>
+
+      <div class="leasing-form__result-block">
+        <div class="leasing-form__block">
+          <p class="leasing-form__result-header">Сумма договора лизинга</p>
+          <p class="leasing-form__result-amount leasing-form__result-text"></p>
+        </div>
+
+        <div class="leasing-form__block">
+          <p class="leasing-form__result-header">Ежемесячный платеж от</p>
+          <p class="leasing-form__result-month leasing-form__result-text"></p>
+        </div>
       </div>
-      <input type="range" name="amountRange" min="1500000" max="10000000" class="leasing-form__input_range">
-    </fieldset>
 
-    <fieldset class="leasing-form__input-set">
-      <legend class="leasing-form__input-header">Первоначальный взнос</legend>
-      <input type="text" name="initial" class="leasing-form__input">
-      <input type="text" min="10" max="60" name="percent" class="leasing-form__input leasing-form__input_percent">
-      <input type="range" name="percentRange" min="10" max="60" class="leasing-form__input_range">
-    </fieldset>
-
-    <fieldset class="leasing-form__input-set">
-      <legend class="leasing-form__input-header">Срок лизинга</legend>
-      <div class="leasing-form__form-icon leasing-form__form-icon_month">
-        <input type="text" min="6" max="120" name="time" class="leasing-form__input">
-      </div>
-      <input type="range" name="timeRange" min="6" max="120" class="leasing-form__input_range">
-    </fieldset>
-
-    <div class="leasing-form__result-block">
-      <div class="leasing-form__block">
-        <p class="leasing-form__result-header">Сумма договора лизинга</p>
-        <p class="leasing-form__result-amount leasing-form__result-text"></p>
-      </div>
-
-      <div class="leasing-form__block">
-        <p class="leasing-form__result-header">Ежемесячный платеж от</p>
-        <p class="leasing-form__result-month leasing-form__result-text"></p>
-      </div>
-    </div>
-
-    <button class="leasing-form__button" type="submit">Оставить заявку</button>
-
-  </form>
-</body>
-
+      <button class="leasing-form__button" type="submit">Оставить заявку</button>
+    </form>
+  </body>
 </html>

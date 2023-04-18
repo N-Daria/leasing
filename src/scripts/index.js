@@ -17,15 +17,16 @@ import {
 } from '../consts/consts';
 
 function formatValue(input, val) {
-  let value = 0;
-
   if (!val) {
-    value = null;
+    return null;
   }
 
-  value = String(val).replace(/(.)(?=(\d{3})+$)/g, '$1 ');
+  let value = 0;
+  const formatter = new Intl.NumberFormat('ru');
+  value = formatter.format(val);
 
   if (input && input.name === 'percent') {
+    value.slice(0, 1);
     value += '%';
   } else if (input && input.name === 'initial') {
     value += ' ₽';
@@ -38,7 +39,7 @@ function convertToNumber(val) {
   const value = parseInt(val.replace(/\s|₽|%/g, ''), 10);
 
   if (!value || Number.isNaN(value)) {
-    return false;
+    return null;
   }
 
   return value;
@@ -60,7 +61,11 @@ function handleInputChange({ target }) {
   const min = Number(target.min);
   const max = Number(target.max);
   const value = convertToNumber(target.value);
-  const connectedInput = findConnectedInput(target);
+  let connectedInput = findConnectedInput(target);
+
+  if (target.name === 'initial') {
+    connectedInput = percentRangeInput;
+  }
 
   if (target.type === 'range') {
     if (target.name === 'percentRange') {
@@ -71,47 +76,53 @@ function handleInputChange({ target }) {
     connectedInput.value = formatValue(connectedInput, value);
     target.style.backgroundSize = `${((value - min) * 100) / (max - min)}% 100%`;
   } else if (target.type === 'text') {
-    if (target.name === 'initial') {
-      const percentValue = (value / convertToNumber(amountInput.value)) * 100;
-      if (value < min || typeof value !== 'number') {
-        percentRangeInput.value = percentRangeInput.min;
-        percentRangeInput.style.backgroundSize = '1% 1%';
-        target.value = formatValue(target, min);
-        percentInput.value = formatValue(percentInput, percentInput.min);
-      } else if (value > max) {
-        percentRangeInput.value = percentRangeInput.max;
-        percentRangeInput.style.backgroundSize = '100% 100%';
-        target.value = formatValue(target, max);
-        percentInput.value = formatValue(percentInput, percentInput.max);
-      } else {
-        target.value = formatValue(target, value);
-        percentRangeInput.value = percentValue;
-        percentRangeInput.style.backgroundSize = `${
-          ((percentRangeInput.value - percentRangeInput.min) * 100) /
-          (percentRangeInput.max - percentRangeInput.min)
-        }% 100%`;
-        percentInput.value = formatValue(percentInput, percentValue);
-      }
-      return;
-    }
-
     if (value < min || typeof value !== 'number') {
-      connectedInput.value = min;
       connectedInput.style.backgroundSize = '1% 1%';
       target.value = formatValue(target, min);
+
+      if (target.name === 'initial') {
+        connectedInput.value = connectedInput.min;
+        percentInput.value = formatValue(percentInput, percentInput.min);
+
+        return;
+      }
+
+      connectedInput.value = min;
     } else if (value > max) {
       connectedInput.style.backgroundSize = '100% 100%';
-      connectedInput.value = max;
       target.value = formatValue(target, max);
+
+      if (target.name === 'initial') {
+        connectedInput.value = connectedInput.max;
+        percentInput.value = formatValue(percentInput, percentInput.max);
+
+        return;
+      }
+
+      connectedInput.value = max;
     } else {
-      connectedInput.value = value;
-      connectedInput.style.backgroundSize = `${((value - min) * 100) / (max - min)}% 100%`;
       target.value = formatValue(target, value);
+
+      if (target.name === 'initial') {
+        const percentValue = (value / convertToNumber(amountInput.value)) * 100;
+
+        connectedInput.value = percentValue;
+        connectedInput.style.backgroundSize = `${
+          ((connectedInput.value - connectedInput.min) * 100) /
+          (connectedInput.max - connectedInput.min)
+        }% 100%`;
+        percentInput.value = formatValue(percentInput, percentValue);
+
+        return;
+      }
+
+      connectedInput.style.backgroundSize = `${((value - min) * 100) / (max - min)}% 100%`;
+      connectedInput.value = value;
     }
   }
 }
 
-function setInitialAmountInputValue(value) {
+function setAmountInputValue(value) {
   const min = Math.round((convertToNumber(amountInput.value) * 10) / 100);
   const max = Math.round((convertToNumber(amountInput.value) * 60) / 100);
 
@@ -128,7 +139,7 @@ function setInitialRange(input, rangeInput) {
   const value = convertToNumber(input.value);
 
   if (input.name === 'percent') {
-    setInitialAmountInputValue(value);
+    setAmountInputValue(value);
   }
 
   rangeInput.style.backgroundSize = `${((value - min) * 100) / (max - min)}% 100%`;
@@ -165,13 +176,10 @@ function handleLeasingFormSubmit(event) {
   leasingFormSubmitButton.textContent = '';
   leasingFormSubmitButton.disabled = true;
 
-  const res = {
-    'Желаемая сумма кредита': convertToNumber(amountInput.value),
-    'Первоначальный взнос': convertToNumber(initialInput.value),
-    'Срок лизинга': convertToNumber(timeInput.value),
-    'Сумма договора лизинга': convertToNumber(resultAmount.textContent),
-    'Ежемесячный платеж от': convertToNumber(resultMonthlyPayment.textContent),
-  };
+  const res = allInputs.map((input) => {
+    const { name, value } = input;
+    return { name, value };
+  });
 
   alert(JSON.stringify(res));
 
@@ -184,8 +192,8 @@ allInputs.forEach((input) => {
   input.addEventListener('change', countLeasing);
 });
 
-amountInput.addEventListener('change', () => {
-  setInitialAmountInputValue(convertToNumber(percentInput.value));
+amountInput.addEventListener('input', () => {
+  setAmountInputValue(convertToNumber(percentInput.value));
 });
 
 rangeInputs.forEach((input) => {
