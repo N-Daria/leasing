@@ -119,6 +119,13 @@ function handleInputChange({ target }) {
       connectedInput.style.backgroundSize = `${((value - min) * 100) / (max - min)}% 100%`;
       connectedInput.value = value;
     }
+
+    if (target.name === 'percent') {
+      initialInput.value = formatValue(
+        initialInput,
+        (convertToNumber(amountInput.value) / 100) * convertToNumber(target.value),
+      );
+    }
   }
 }
 
