@@ -1,8 +1,8 @@
-@import "../../../../consts/consts.scss";
+@import '../../../../consts/consts.scss';
 
 .leasing-form__input_range {
   -webkit-appearance: none;
-  width: 100%;
+  width: calc(100% - 32px);
   margin: 0 auto;
   display: block;
   top: -2px;
@@ -10,12 +10,11 @@
   position: relative;
   background-image: linear-gradient($orangeColor, $orangeColor);
   background-repeat: no-repeat;
-  transition: height 0.5s, width 0.5s;
-
 
   &:hover {
     height: 1px;
     cursor: ew-resize;
+    margin: 1px auto 0;
 
     &::-webkit-slider-thumb {
       height: 24px;
@@ -37,5 +36,4 @@
     border: none;
     background: transparent;
   }
-
 }
