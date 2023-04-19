@@ -14,6 +14,7 @@ import {
   resultAmount,
   resultMonthlyPayment,
   allInputs,
+  amountRangeInput,
 } from '../consts/consts';
 
 function formatValue(input, val) {
@@ -130,13 +131,17 @@ function handleInputChange({ target }) {
 }
 
 function setAmountInputValue(value) {
+  if (convertToNumber(amountInput.value) === null) {
+    amountInput.value = formatValue(amountInput, amountInput.min);
+  }
+
   const min = Math.round((convertToNumber(amountInput.value) * 10) / 100);
   const max = Math.round((convertToNumber(amountInput.value) * 60) / 100);
 
   initialInput.min = min;
   initialInput.max = max;
 
-  const initialAmount = Math.ceil(value * 0.01 * convertToNumber(amountInput.value));
+  const initialAmount = Math.ceil((value / 100) * convertToNumber(amountInput.value));
   initialInput.value = formatValue(initialInput, initialAmount);
 }
 
@@ -176,9 +181,7 @@ function setInitial() {
   countLeasing();
 }
 
-function handleLeasingFormSubmit(event) {
-  event.preventDefault();
-
+function handleLeasingFormSubmit() {
   leasingFormSubmitButton.classList.add('leasing-form__button_loading');
   leasingFormSubmitButton.textContent = '';
   leasingFormSubmitButton.disabled = true;
@@ -196,21 +199,26 @@ function handleLeasingFormSubmit(event) {
 }
 
 allInputs.forEach((input) => {
-  input.addEventListener('change', countLeasing);
+  input.addEventListener('change', (event) => {
+    handleInputChange(event);
+    countLeasing();
+  });
 });
 
-amountInput.addEventListener('input', () => {
+amountInput.addEventListener('change', () => {
   setAmountInputValue(convertToNumber(percentInput.value));
 });
 
-rangeInputs.forEach((input) => {
-  input.addEventListener('input', handleInputChange);
+amountRangeInput.addEventListener('change', () => {
+  setAmountInputValue(convertToNumber(percentInput.value));
 });
 
-numberInputs.forEach((input) => {
-  input.addEventListener('change', handleInputChange);
-});
+leasingForm.addEventListener('submit', (event) => {
+  event.preventDefault();
 
-leasingForm.addEventListener('submit', handleLeasingFormSubmit);
+  setTimeout(() => {
+    handleLeasingFormSubmit();
+  }, 0);
+});
 
 setInitial();

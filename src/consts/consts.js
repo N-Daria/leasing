@@ -4,6 +4,7 @@ export const rangeInputs = Array.from(leasingForm.querySelectorAll('input[type="
 export const numberInputs = Array.from(leasingForm.querySelectorAll('input[type="text"]'));
 
 export const amountInput = leasingForm.querySelector('input[name="amount"]');
+export const amountRangeInput = leasingForm.querySelector('input[name="amountRange"]');
 export const initialInput = leasingForm.querySelector('input[name="initial"]');
 export const percentRangeInput = leasingForm.querySelector('input[name="percentRange"]');
 export const percentInput = leasingForm.querySelector('input[name="percent"]');
